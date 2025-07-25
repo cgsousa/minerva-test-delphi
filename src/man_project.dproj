@@ -117,6 +117,13 @@
             <FormType>dfm</FormType>
         </DCCReference>
         <DCCReference Include="view\view.ExtCtrls.pas"/>
+        <DCCReference Include="model\model.employee.pas"/>
+        <DCCReference Include="ropository\repository.employee.pas"/>
+        <DCCReference Include="view\view.ProjectDetails.pas">
+            <Form>frmProjectDetails</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
+        <DCCReference Include="dto\dto.ProjectDetails.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

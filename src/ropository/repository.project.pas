@@ -14,14 +14,15 @@ type
   protected
     procedure DoInsert(aEntity: TProject);
     procedure DoUpdate(aEntity: TProject);
-    procedure DoDelete(aEntity: TProject);
   public
     constructor create(); reintroduce ;
     destructor destroy; override;
 
     function find(const aID: Integer): TProject;
     function findAll(): TObjectList<TProject>;
+    function findTasks(const aID: Integer): TObjectList<TProjectTask>;
     procedure save(aEntity: TProject);
+    procedure DoDelete(aEntity: TProject);
   end;
 
 
@@ -44,8 +45,26 @@ begin
 end;
 
 procedure TProjectRepository.DoDelete(aEntity: TProject);
+var
+  cmd: TFDQuery ;
 begin
+  cmd :=TConnectionManager.getInstance.newQuery ;
+  try
 
+    cmd.SQL.Add('delete from tab_projects where cod_projeto = :cod_projeto');
+    cmd.Params.ParamByName('cod_projeto').AsInteger :=aEntity.iD;
+
+    try
+      cmd.ExecSQL ;
+    except
+      on E:EDatabaseError do
+      begin
+        raise EModelDeleteError.Create('Projeto');
+      end;
+    end;
+  finally
+    cmd.Free;
+  end;
 end;
 
 procedure TProjectRepository.DoInsert(aEntity: TProject);
@@ -98,12 +117,12 @@ begin
   cmd :=TConnectionManager.getInstance.newQuery ;
   try
 
-    cmd.SQL.Add('update tab_projects               ');
-    cmd.SQL.Add('   set nome = :nome               ');
-    cmd.SQL.Add('      ,descricao :descricao       ');
-    cmd.SQL.Add('      ,data_inicio =:data_inicio  ');
-    cmd.SQL.Add('      ,data_termino =:data_termino');
-    cmd.SQL.Add('where cod_projeto = :cod_projeto  ');
+    cmd.SQL.Add('update tab_projects              ');
+    cmd.SQL.Add('   set nome        =:nome        ');
+    cmd.SQL.Add('      ,descricao   =:descricao   ');
+    cmd.SQL.Add('      ,data_inicio =:data_inicio ');
+    cmd.SQL.Add('      ,data_termino=:data_termino');
+    cmd.SQL.Add('where cod_projeto  =:cod_projeto ');
 
     cmd.Params.ParamByName('nome').AsString :=aEntity.Name;
     cmd.Params.ParamByName('descricao').AsString :=aEntity.description;
@@ -117,6 +136,8 @@ begin
       cmd.Params.ParamByName('data_termino').AsDate :=aEntity.date_end
     else
       cmd.Params.ParamByName('data_termino').AsDate :=0;
+
+    cmd.Params.ParamByName('cod_projeto').AsInteger :=aEntity.iD;
 
     try
       cmd.ExecSQL ;
@@ -172,6 +193,11 @@ begin
   finally
     rset.Free;
   end;
+end;
+
+function TProjectRepository.findTasks(
+  const aID: Integer): TObjectList<TProjectTask>;
+begin
 
 end;
 

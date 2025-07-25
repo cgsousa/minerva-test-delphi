@@ -21,8 +21,12 @@ type
     btnNew: TButton;
     btnUpd: TButton;
     btnDel: TButton;
+    Button1: TButton;
+    actDet: TAction;
     procedure actNewExecute(Sender: TObject);
     procedure actUpdExecute(Sender: TObject);
+    procedure actDelExecute(Sender: TObject);
+    procedure actDetExecute(Sender: TObject);
   private
     { Private declarations }
     repo: TProjectRepository;
@@ -51,6 +55,30 @@ uses repository.intf, view.cadastro.project;
 
 
 { TfrmCadProject }
+
+procedure TfrmProjects.actDelExecute(Sender: TObject);
+var
+  confirm: Integer;
+begin
+  confirm :=TaskMessageDlg('Confirmar','Deseja deletar o projeto selecionado?',
+                          mtConfirmation,[mbOK,mbCancel],0);
+  if(confirm = mrOk)then
+  begin
+    try
+      repo.DoDelete(project);
+      TaskMessageDlg('Ifo','Projeto deletedo com sucesso.',mtInformation,[mbOK],0);
+      DoLoadGrid;
+    except on E:EModelDeleteError do
+      TaskMessageDlg('Err',E.Message,mtError,[mbOK],0);
+    end;
+  end;
+  ActiveControl :=lvGrid;
+end;
+
+procedure TfrmProjects.actDetExecute(Sender: TObject);
+begin
+  //
+end;
 
 procedure TfrmProjects.actNewExecute(Sender: TObject);
 var
@@ -84,9 +112,8 @@ begin
     except on E:EModelUpdateError do
       TaskMessageDlg('Err',E.Message,mtError,[mbOK],0);
     end;
-  end
-  else
-    ActiveControl :=lvGrid;
+  end;
+  ActiveControl :=lvGrid;
 end;
 
 procedure TfrmProjects.DoCreate;
@@ -123,6 +150,8 @@ var
   project: TProject;
   item: TListItem;
 begin
+  if(projects <> nil)then
+    projects.Free;
   projects :=repo.findAll();
   if(projects = nil)then
     exit;
@@ -142,6 +171,10 @@ begin
     else
       item.SubItems.Add('-');
   end;
+  if(lvGrid.Items.Count > 0)then
+  begin
+    lvGrid.ItemIndex :=0;
+  end;
 end;
 
 procedure TfrmProjects.DoLoadGridChange(Sender: TObject; Item: TListItem;
@@ -156,7 +189,10 @@ end;
 procedure TfrmProjects.DoShow;
 begin
   DoLoadGrid ;
-
+  if(projects  = nil)then
+    ActiveControl :=btnNew
+  else
+    ActiveControl :=lvGrid;
 end;
 
 end.

@@ -9,7 +9,11 @@ uses
   dao.ConnectionManager in 'dao\dao.ConnectionManager.pas',
   view.Projects in 'view\view.Projects.pas' {frmProjects},
   view.cadastro.project in 'view\cadastro\view.cadastro.project.pas' {frmCadProject},
-  view.ExtCtrls in 'view\view.ExtCtrls.pas';
+  view.ExtCtrls in 'view\view.ExtCtrls.pas',
+  model.employee in 'model\model.employee.pas',
+  repository.employee in 'ropository\repository.employee.pas',
+  view.ProjectDetails in 'view\view.ProjectDetails.pas' {frmProjectDetails},
+  dto.ProjectDetails in 'dto\dto.ProjectDetails.pas';
 
 {$R *.res}
 

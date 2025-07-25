@@ -49,11 +49,10 @@ object frmProjects: TfrmProjects
     RowSelect = True
     TabOrder = 2
     ViewStyle = vsReport
-    ExplicitTop = -1
   end
   object btnClose: TButton
     Left = 528
-    Top = 391
+    Top = 390
     Width = 100
     Height = 30
     Caption = 'Fechar'
@@ -83,6 +82,14 @@ object frmProjects: TfrmProjects
     Action = actDel
     TabOrder = 5
   end
+  object Button1: TButton
+    Left = 0
+    Top = 390
+    Width = 100
+    Height = 30
+    Action = actDet
+    TabOrder = 6
+  end
   object alStd: TActionList
     Left = 552
     Top = 16
@@ -99,6 +106,11 @@ object frmProjects: TfrmProjects
     object actDel: TAction
       Category = 'CRUD'
       Caption = 'Deletar'
+      OnExecute = actDelExecute
+    end
+    object actDet: TAction
+      Caption = 'Detalhar'
+      OnExecute = actDetExecute
     end
   end
 end
