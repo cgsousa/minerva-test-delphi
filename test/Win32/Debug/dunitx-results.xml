@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<test-results name="D:\develop\projetos\minerva-test-delphi\test\Win32\Debug\TestSP.exe" total="2" errors="1" failures="0" ignored="0" inconclusive="0" not-run="0" skipped="0" invalid="0" date="2025-07-25" time="9.398">
+  <culture-info current-culture="en" current-uiculture="en" />
+  <test-suite type="Assembly" name="TestSP.exe" executed="true" result="Failure" success="False" time="9.398" asserts="0">
+    <results>
+        <test-suite type="Namespace" name="Test_usp_projects_tasks" executed="true" result="Success" success="True" time="9.397" asserts="0" >
+          <results>
+              <test-suite type="Fixture" name="Test_projects_tasks" executed="True" result="Success" success="True" time="9.397" >
+                <results>
+                  <test-case name="TestExec.TestA" executed="True" result="Success" success="True" time="6.029" asserts="0" />
+                  <test-case name="TestExec.TestB" executed="True" result="Error" success="False" time="3.298" asserts="0" >
+                    <failure>
+                      <message>
+                        <![CDATA[ [FireDAC][Phys][ODBC][Microsoft][SQL Server Native Client 11.0][SQL Server]O tipo de dados do parâmetro de substituição 1 não corresponde ao tipo esperado da especificação de formato. ]]>
+                      </message>
+                      <stack-trace>
+                        <![CDATA[  ]]>
+                      </stack-trace>
+                    </failure>
+                  </test-case>
+                </results>
+              </test-suite>
+          </results>
+        </test-suite>
+    </results>
+  </test-suite>
+</test-results>

@@ -35,18 +35,19 @@ object frmProjectDetails: TfrmProjectDetails
     Left = 0
     Top = 49
     Width = 628
-    Height = 344
-    Align = alTop
+    Height = 377
+    Align = alClient
     Caption = ' Tarefas alocadas /Colaboradores '
     TabOrder = 2
+    ExplicitHeight = 344
     DesignSize = (
       628
-      344)
+      377)
     object lvGrid: TListView
       Left = 4
       Top = 20
       Width = 613
-      Height = 314
+      Height = 347
       Anchors = [akLeft, akTop, akRight, akBottom]
       BorderWidth = 1
       Columns = <
@@ -69,6 +70,7 @@ object frmProjectDetails: TfrmProjectDetails
       RowSelect = True
       TabOrder = 0
       ViewStyle = vsReport
+      ExplicitHeight = 314
     end
   end
 end
